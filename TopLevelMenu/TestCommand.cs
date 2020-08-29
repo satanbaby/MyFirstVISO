@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Task = System.Threading.Tasks.Task;
+
 
 namespace TopLevelMenu
 {
@@ -18,7 +20,8 @@ namespace TopLevelMenu
         /// Command ID.
         /// </summary>
         public const int CommandId = 0x0100;
-
+        public const int CommandId2 = 0x0102;
+        
         /// <summary>
         /// Command menu group (command set GUID).
         /// </summary>
@@ -43,6 +46,13 @@ namespace TopLevelMenu
             var menuCommandID = new CommandID(CommandSet, CommandId);
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
             commandService.AddCommand(menuItem);
+
+            //var menuCommandID2 = new CommandID(CommandSet, CommandId2);
+            //var menuItem2 = new MenuCommand(this.Execute2, menuCommandID);
+            //commandService.AddCommand(menuItem2);
+            CommandID subCommandID = new CommandID(CommandSet, CommandId2);
+            MenuCommand subItem = new MenuCommand(new EventHandler(Execute2), subCommandID);
+            commandService.AddCommand(subItem);
         }
 
         /// <summary>
@@ -97,6 +107,15 @@ namespace TopLevelMenu
                 OLEMSGICON.OLEMSGICON_INFO,
                 OLEMSGBUTTON.OLEMSGBUTTON_OK,
                 OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+        }
+
+        private void Execute2(object sender, EventArgs e)
+        {
+            ThreadHelper.ThrowIfNotOnUIThread();
+
+            Process proc = new Process();
+            proc.StartInfo.FileName = "notepad.exe";
+            proc.Start();
         }
     }
 }
