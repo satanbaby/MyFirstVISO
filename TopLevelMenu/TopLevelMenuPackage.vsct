@@ -53,6 +53,9 @@
     <!--This section defines the elements the user can interact with, like a menu command or a button
         or combo box in a toolbar. -->
     <Buttons>
+      <!-- 
+        1. 新增Menu https://docs.microsoft.com/zh-tw/visualstudio/extensibility/adding-a-menu-to-the-visual-studio-menu-bar?view=vs-2019
+        2. 觸發Button https://docs.microsoft.com/zh-tw/visualstudio/extensibility/adding-a-submenu-to-a-menu?view=vs-2019-->
       <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
           The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
           the CommandFlag node.
