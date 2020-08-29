@@ -22,7 +22,7 @@
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidHelloWorldPackage">
+  <Commands package="guidTopLevelMenuPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -30,25 +30,24 @@
     called "command set" and is used to group different command inside a logically related
     group; your package should define its own command set in order to avoid collisions
     with command ids defined by other packages. -->
-
+    <Menus>
+      <Menu guid="guidTopLevelMenuPackageCmdSet" id="TopLevelMenu" priority="0x700" type="Menu">
+        <Parent guid="guidSHLMainMenu"
+                id="IDG_VS_MM_TOOLSADDINS" />
+        <Strings>
+          <ButtonText>Test Menu</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
     <!-- In this section you can define new menu groups. A menu group is a container for
          other menus or buttons (commands); from a visual point of view you can see the
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidHelloWorldPackageCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+      <Group guid="guidTopLevelMenuPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidTopLevelMenuPackageCmdSet" id="TopLevelMenu"/>
       </Group>
     </Groups>
-
-    <Menus>
-      <Menu guid="guidHelloWorldPackageCmdSet" id="Command1Id">
-        <Parent guid="guidHelloWorldPackageCmdSet" id="MyMenuGroup" />
-        <Strings>
-          <ButtonText>Invoke Command1</ButtonText>
-        </Strings>
-      </Menu>
-    </Menus>
 
     <!--Buttons section. -->
     <!--This section defines the elements the user can interact with, like a menu command or a button
@@ -61,18 +60,11 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidHelloWorldPackageCmdSet" id="Command1Id" priority="0x0100" type="Button">
-        <Parent guid="guidHelloWorldPackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidTopLevelMenuPackageCmdSet" id="TestCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidTopLevelMenuPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>Invoke Command1</ButtonText>
-        </Strings>
-      </Button>
-      <Button guid="guidHelloWorldPackageCmdSet" id="TopLevelMenu" priority="0x1021" type="Button">
-        <Parent guid="guidHelloWorldPackageCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
-        <Strings>
-          <ButtonText>Invoke Command1</ButtonText>
+          <ButtonText>Invoke TestCommand</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -84,22 +76,22 @@
             bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
             inside a button definition. An important aspect of this declaration is that the element id
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
-      <Bitmap guid="guidImages" href="Resources\Command1.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
+      <Bitmap guid="guidImages" href="Resources\TestCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
     </Bitmaps>
   </Commands>
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidHelloWorldPackage" value="{0419d0f0-9028-4a7c-8c64-151458a36481}" />
+    <GuidSymbol name="guidTopLevelMenuPackage" value="{18684a0e-2380-4cd4-945f-0e5148044c91}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidHelloWorldPackageCmdSet" value="{06e72a0a-f95f-44e1-91dc-a493a6d83348}">
+    <GuidSymbol name="guidTopLevelMenuPackageCmdSet" value="{b32144dc-910d-466f-8121-04f46a3672dc}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="Command1Id" value="0x0100" />
+      <IDSymbol name="TestCommandId" value="0x0100" />
       <IDSymbol name="TopLevelMenu" value="0x1021"/>
     </GuidSymbol>
 
-    <GuidSymbol name="guidImages" value="{8cfaf142-3c16-4da5-8808-9e012d26613a}" >
+    <GuidSymbol name="guidImages" value="{5c88d773-12e8-4ff5-96b6-0a9a5aabbabb}" >
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
